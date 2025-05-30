@@ -1,9 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Mi primera página</title>
-  </head>
-  <body>
-    <h1>¡Hola, mundo desde GitHub Pages!</h1>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tareas Mejorada</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Lista de Tareas</h2>
+    <div class="task-input">
+      <input type="text" id="taskInput" placeholder="Escribe una tarea...">
+      <button onclick="addTask()">Agregar</button>
+    </div>
+
+    <div class="filters">
+      <button onclick="setFilter('all')">Todas</button>
+      <button onclick="setFilter('pending')">Pendientes</button>
+      <button onclick="setFilter('completed')">Completadas</button>
+      <button onclick="clearCompleted()">🧹 Limpiar completadas</button>
+    </div>
+
+    <p id="taskCounter"></p>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
