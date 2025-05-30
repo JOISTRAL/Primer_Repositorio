@@ -28,7 +28,10 @@ function renderTasks() {
       `;
     } else {
       li.innerHTML = `
-        <span onclick="toggleTask(${index})">${task.text}</span>
+        <div class="task-content">
+          <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})">
+          <span class="task-text" onclick="toggleTask(${index})">${task.text}</span>
+        </div>
         <div>
           <button onclick="editTask(${index})">✏️</button>
           <button onclick="deleteTask(${index})">❌</button>
