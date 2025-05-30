@@ -8,7 +8,10 @@
 <body>
 
   <div class="container">
-    <h2>📝 Lista de Tareas</h2>
+    <div class="header">
+      <h2>📝 Lista de Tareas</h2>
+      <button id="toggleTheme">🌙 Modo oscuro</button>
+    </div>
 
     <div class="task-input">
       <input type="text" id="taskInput" placeholder="Escribe una tarea...">
@@ -24,6 +27,7 @@
 
     <p id="taskCounter"></p>
     <ul id="taskList"></ul>
+    <div id="notification" class="hidden"></div>
   </div>
 
   <script src="script.js"></script>

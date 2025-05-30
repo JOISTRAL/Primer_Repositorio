@@ -5,6 +5,16 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function notify(message) {
+  const notification = document.getElementById("notification");
+  notification.textContent = message;
+  notification.classList.remove("hidden");
+
+  setTimeout(() => {
+    notification.classList.add("hidden");
+  }, 3000);
+}
+
 function renderTasks() {
   const taskList = document.getElementById("taskList");
   const counter = document.getElementById("taskCounter");
@@ -30,7 +40,7 @@ function renderTasks() {
       li.innerHTML = `
         <div class="task-content">
           <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})">
-          <span class="task-text" onclick="toggleTask(${index})">${task.text}</span>
+          <span class="task-text">${task.text}</span>
         </div>
         <div>
           <button onclick="editTask(${index})">✏️</button>
@@ -55,6 +65,7 @@ function addTask() {
     input.value = "";
     saveTasks();
     renderTasks();
+    notify("🆕 Tarea agregada");
   }
 }
 
@@ -62,12 +73,14 @@ function toggleTask(index) {
   tasks[index].completed = !tasks[index].completed;
   saveTasks();
   renderTasks();
+  notify(tasks[index].completed ? "✅ Tarea completada" : "↩️ Tarea marcada como pendiente");
 }
 
 function deleteTask(index) {
   tasks.splice(index, 1);
   saveTasks();
   renderTasks();
+  notify("🗑️ Tarea eliminada");
 }
 
 function editTask(index) {
@@ -85,6 +98,7 @@ function updateTask(index, newText) {
   tasks[index].editing = false;
   saveTasks();
   renderTasks();
+  notify("✏️ Tarea actualizada");
 }
 
 function setFilter(value) {
@@ -96,6 +110,17 @@ function clearCompleted() {
   tasks = tasks.filter(task => !task.completed);
   saveTasks();
   renderTasks();
+  notify("🧹 Tareas completadas eliminadas");
 }
+
+document.getElementById("toggleTheme").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const btn = document.getElementById("toggleTheme");
+  if (document.body.classList.contains("dark")) {
+    btn.textContent = "☀️ Modo claro";
+  } else {
+    btn.textContent = "🌙 Modo oscuro";
+  }
+});
 
 renderTasks();
